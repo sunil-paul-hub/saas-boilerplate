@@ -20,6 +20,7 @@ Design notes: `docs/superpowers/specs/2026-11-19-saas-boilerplate-design.md`.
 ## First run
 
 ```sh
+cp .env.example .env                 # dev-only values
 docker compose up -d postgres      # PostgreSQL on 127.0.0.1:5442 (container base-postgres)
 pnpm install
 pnpm approve-builds                # only if pnpm reports ignored build scripts (argon2, esbuild); approve them
@@ -30,7 +31,7 @@ pnpm dev:web                       # http://localhost:5173 (Vite picks the next 
 pnpm dev:worker                    # optional: delivers queued emails
 ```
 
-`.env` (dev-only values, committed on purpose) holds the database URLs and the session secret.
+`.env` (copy `.env.example` to `.env`; dev-only values, not committed) holds the database URLs and the session secret.
 `db:reset` is destructive: it drops and recreates the `base` database. Use it only in development.
 If you reset the database while the API is running, restart the API.
 
