@@ -1,0 +1,16 @@
+{
+  "name": "@base/config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./terminology": "./terminology.ts",
+    "./branding": "./branding.ts",
+    "./plans": "./plans.ts"
+  },
+  "scripts": { "typecheck": "tsc --noEmit -p tsconfig.json" },
+  "devDependencies": { "typescript": "^5.6.3" }
+}

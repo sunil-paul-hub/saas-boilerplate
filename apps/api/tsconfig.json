@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true, "experimentalDecorators": true, "emitDecoratorMetadata": false,
+    "allowImportingTsExtensions": true, "types": ["node", "multer"], "useDefineForClassFields": false,
+    "strictPropertyInitialization": false, "noImplicitOverride": true
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts"]
+}

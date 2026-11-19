@@ -1,0 +1,38 @@
+import * as React from 'react'
+import { Dialog as SheetPrimitive } from 'radix-ui'
+import { X } from 'lucide-react'
+import { cn } from '@/lib/utils'
+
+export const Sheet = SheetPrimitive.Root
+export const SheetTrigger = SheetPrimitive.Trigger
+export const SheetClose = SheetPrimitive.Close
+
+export function SheetContent({ className, children, side = 'right', hideClose, ...props }: React.ComponentProps<typeof SheetPrimitive.Content> & { side?: 'top' | 'right' | 'bottom' | 'left'; hideClose?: boolean }) {
+  return (
+    <SheetPrimitive.Portal>
+      <SheetPrimitive.Overlay className="fixed inset-0 z-50 bg-black/30 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0" />
+      <SheetPrimitive.Content
+        className={cn(
+          'fixed z-50 flex flex-col gap-3 bg-background shadow-lg outline-none transition ease-in-out data-[state=closed]:animate-out data-[state=closed]:duration-200 data-[state=open]:animate-in data-[state=open]:duration-300',
+          side === 'right' && 'inset-y-0 right-0 h-full w-full border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-md',
+          side === 'left' && 'inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm',
+          side === 'top' && 'inset-x-0 top-0 h-auto border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top',
+          side === 'bottom' && 'inset-x-0 bottom-0 h-auto max-h-[92dvh] rounded-t-xl border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',
+          className,
+        )}
+        {...props}
+      >
+        {children}
+        {!hideClose && (
+          <SheetPrimitive.Close className="absolute top-3.5 right-4 rounded-sm p-1 opacity-70 transition-opacity outline-none hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring [&_svg]:size-4">
+            <X /><span className="sr-only">Close</span>
+          </SheetPrimitive.Close>
+        )}
+      </SheetPrimitive.Content>
+    </SheetPrimitive.Portal>
+  )
+}
+export const SheetHeader = ({ className, ...p }: React.ComponentProps<'div'>) => <div className={cn('flex flex-col gap-1 border-b p-4 pr-12', className)} {...p} />
+export const SheetFooter = ({ className, ...p }: React.ComponentProps<'div'>) => <div className={cn('mt-auto flex flex-col-reverse gap-2 border-t p-4 sm:flex-row sm:justify-end pb-safe', className)} {...p} />
+export const SheetTitle = ({ className, ...p }: React.ComponentProps<typeof SheetPrimitive.Title>) => <SheetPrimitive.Title className={cn('text-base font-semibold', className)} {...p} />
+export const SheetDescription = ({ className, ...p }: React.ComponentProps<typeof SheetPrimitive.Description>) => <SheetPrimitive.Description className={cn('text-sm text-muted-foreground', className)} {...p} />

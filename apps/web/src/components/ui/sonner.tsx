@@ -1,0 +1,14 @@
+import { Toaster as Sonner, type ToasterProps } from 'sonner'
+import { usePrefs } from '@/app/prefs'
+
+export function Toaster(props: ToasterProps) {
+  const { resolvedTheme } = usePrefs()
+  return (
+    <Sonner
+      theme={resolvedTheme}
+      className="toaster group"
+      style={{ '--normal-bg': 'var(--popover)', '--normal-text': 'var(--popover-foreground)', '--normal-border': 'var(--border)' } as React.CSSProperties}
+      {...props}
+    />
+  )
+}

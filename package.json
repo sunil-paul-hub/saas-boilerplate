@@ -1,0 +1,17 @@
+{
+  "name": "saas-boilerplate",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@12.18.0",
+  "scripts": {
+    "db:up": "docker compose up -d postgres",
+    "db:migrate": "pnpm --filter @base/db migrate",
+    "db:reset": "pnpm --filter @base/db reset",
+    "db:seed": "pnpm --filter @base/db seed",
+    "db:test": "pnpm --filter @base/db test",
+    "dev:api": "pnpm --filter @base/api dev",
+    "dev:web": "pnpm --filter @base/web dev",
+    "dev:worker": "pnpm --filter @base/worker dev",
+    "typecheck": "pnpm -r typecheck"
+  }
+}
